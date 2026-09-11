@@ -2,9 +2,9 @@
 
 **版**：1.0
 
-**適用基準**：[データ基盤汎用デザインガイド v1.1](データ基盤汎用デザインガイド.md)
+**適用基準**：[データ基盤汎用デザインガイド v1.0](データ基盤汎用デザインガイド.md)
 
-**個別適用**：[電力小売りデータ基盤 個別デザインガイド v1.1](電力小売りデータ基盤個別デザインガイド.md)
+**個別適用**：[電力小売りデータ基盤 個別デザインガイド v1.0](電力小売りデータ基盤個別デザインガイド.md)
 
 ## 0. 実装環境標準
 
@@ -12,7 +12,7 @@
 
 ## 1. 目的と適用範囲
 
-本書は、汎用デザインガイドv1.1と電力小売り個別ガイドv1.1に定義された統制を、実際のCI/CDパイプライン、Terraform、BigQuery SQL、Dataform、デプロイ後監視で自動検証するための実装チェックリストである。既存の正式ガイド本文を変更せず、実装時の検証標準として利用する。
+本書は、汎用デザインガイドv1.0と電力小売り個別ガイドv1.0に定義された統制を、実際のCI/CDパイプライン、Terraform、BigQuery SQL、Dataform、デプロイ後監視で自動検証するための実装チェックリストである。既存の正式ガイド本文を変更せず、実装時の検証標準として利用する。
 
 統制は、次の4層に分けて実装する。
 
@@ -554,8 +554,8 @@ CIの判定結果には、コミットSHA、Terraform planハッシュ、SQLモ�
 
 ## References
 
-[1]: /home/ubuntu/output/design-guides/data-platform-generic-design-guide.md "データ基盤汎用デザインガイド v1.1"
-[2]: /home/ubuntu/output/design-guides/electricity-retail-data-platform-design-guide.md "電力小売りデータ基盤 個別デザインガイド v1.1"
+[1]: /home/ubuntu/output/design-guides/data-platform-generic-design-guide.md "データ基盤汎用デザインガイド v1.0"
+[2]: /home/ubuntu/output/design-guides/electricity-retail-data-platform-design-guide.md "電力小売りデータ基盤 個別デザインガイド v1.0"
 [3]: /home/ubuntu/upload/bigquery-guideline.md "BigQuery データ基盤開発運用ガイドライン"
 [4]: https://cloud.google.com/docs/terraform "Terraform on Google Cloud documentation"
 [5]: https://cloud.google.com/iam/docs/conditions-overview "IAM Conditions overview"
