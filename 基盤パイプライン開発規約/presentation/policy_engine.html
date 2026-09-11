@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    .slide-container { 
+      width: 1280px; min-height: 720px; 
+      background: #FFFFFF; 
+      display: flex; flex-direction: column; 
+      padding: 48px;
+      font-family: 'Noto Sans JP', sans-serif;
+      color: #0B192C;
+    }
+    h2 { font-size: 32px; font-weight: 700; margin-bottom: 40px; border-left: 8px solid #0B192C; padding-left: 16px; }
+    .split { display: flex; gap: 40px; flex: 1; }
+    .left { flex: 1; }
+    .right { flex: 1; background: #F8F9FA; border: 1px solid #E2E8F0; border-radius: 6px; padding: 24px; font-family: 'Roboto Mono', monospace; font-size: 16px; color: #0B192C; overflow: hidden; }
+    .diagram-box { border: 2px solid #0B192C; padding: 20px; border-radius: 6px; margin-bottom: 20px; text-align: center; font-weight: 700; }
+    .diagram-arrow { text-align: center; font-size: 24px; color: #0D9488; margin: 10px 0; }
+    .code-comment { color: #64748B; }
+    .code-keyword { color: #0D9488; font-weight: 700; }
+    .footer-motif { position: absolute; bottom: 24px; left: 48px; right: 48px; border-top: 2px solid #0D9488; padding-top: 12px; display: flex; justify-content: space-between; font-size: 14px; color: #475569; }
+  </style>
+</head>
+<body>
+  <div class="slide-container">
+    <h2>Policy as Code の構成</h2>
+    <div class="split">
+      <div class="left">
+        <div class="diagram-box">Terraform Plan JSON</div>
+        <div class="diagram-arrow">▼</div>
+        <div class="diagram-box" style="background: #0D9488; color: white; border: none;">Conftest (Rego)</div>
+        <div class="diagram-arrow">▼</div>
+        <div class="diagram-box" style="border-color: #D97706; color: #D97706;">Deny / Warn / Pass</div>
+        <p style="margin-top: 30px; font-size: 18px; line-height: 1.6; color: #475569;">
+          ・Terraform の変更内容を JSON で解析<br>
+          ・組織標準（Rego）と照合<br>
+          ・違反時は PR を自動的に Block
+        </p>
+      </div>
+      <div class="right">
+        <div class="code-comment"># SEC-04: Public access check</div>
+        <span class="code-keyword">deny</span>[msg] {<br>
+        &nbsp;&nbsp;r := resource_changes[_]<br>
+        &nbsp;&nbsp;public_member(r)<br>
+        &nbsp;&nbsp;<span class="code-keyword">not</span> is_exception(r)<br>
+        &nbsp;&nbsp;msg := sprintf(<span style="color: #D97706;">"%s: public principal is prohibited"</span>, [r.address])<br>
+        }<br><br>
+        <div class="code-comment"># COST-04: Label check</div>
+        <span class="code-keyword">deny</span>[msg] {<br>
+        &nbsp;&nbsp;r := resource_changes[_]<br>
+        &nbsp;&nbsp;missing := required_labels - {k | r.change.after.labels[k] != null}<br>
+        &nbsp;&nbsp;count(missing) > 0<br>
+        &nbsp;&nbsp;msg := sprintf(<span style="color: #D97706;">"missing labels %v"</span>, [missing])<br>
+        }
+      </div>
+    </div>
+    <div class="footer-motif">
+      <span>Policy as Code Implementation</span>
+      <span>4</span>
+    </div>
+  </div>
+</body>
+</html>

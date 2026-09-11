@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    .slide-container { 
+      width: 1280px; min-height: 720px; 
+      background: #FFFFFF; 
+      display: flex; flex-direction: column; 
+      padding: 48px;
+      font-family: 'Noto Sans JP', sans-serif;
+      color: #0B192C;
+    }
+    h2 { font-size: 32px; font-weight: 700; margin-bottom: 40px; border-left: 8px solid #0B192C; padding-left: 16px; }
+    .pipeline { display: flex; align-items: center; justify-content: space-between; flex: 1; padding: 40px 0; }
+    .gate { 
+      width: 300px; 
+      border: 1px solid #0B192C; 
+      border-radius: 6px; 
+      padding: 20px; 
+      background: #F8F9FA;
+      position: relative;
+    }
+    .gate-title { font-size: 18px; font-weight: 700; margin-bottom: 12px; color: #D97706; text-align: center; border-bottom: 1px solid #E2E8F0; padding-bottom: 8px; }
+    .gate-list { font-size: 14px; line-height: 1.8; color: #475569; }
+    .arrow { font-size: 32px; color: #0D9488; }
+    .footer-motif { position: absolute; bottom: 24px; left: 48px; right: 48px; border-top: 2px solid #0D9488; padding-top: 12px; display: flex; justify-content: space-between; font-size: 14px; color: #475569; }
+  </style>
+</head>
+<body>
+  <div class="slide-container">
+    <h2>GitHub Actions のゲート設計</h2>
+    <div class="pipeline">
+      <div class="gate">
+        <div class="gate-title">Pull Request ゲート</div>
+        <div class="gate-list">
+          ・Terraform Plan 検査<br>
+          ・Conftest / Checkov<br>
+          ・Secret / PII 静的スキャン<br>
+          ・SQL Lint
+        </div>
+      </div>
+      <div class="arrow">➔</div>
+      <div class="gate">
+        <div class="gate-title">SQL / コスト ゲート</div>
+        <div class="gate-list">
+          ・BigQuery Dry Run<br>
+          ・スキャン量上限チェック<br>
+          ・パーティション条件検証<br>
+          ・Dataform Compile
+        </div>
+      </div>
+      <div class="arrow">➔</div>
+      <div class="gate">
+        <div class="gate-title">Staging ゲート</div>
+        <div class="gate-list">
+          ・ロール別アクセス検証<br>
+          ・Critical DQ テスト<br>
+          ・冪等性 / 再実行テスト<br>
+          ・証跡（Evidence）収集
+        </div>
+      </div>
+    </div>
+    <div class="footer-motif">
+      <span>CI/CD Pipeline Security Gates</span>
+      <span>3</span>
+    </div>
+  </div>
+</body>
+</html>

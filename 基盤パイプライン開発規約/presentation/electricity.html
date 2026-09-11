@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    .slide-container { 
+      width: 1280px; min-height: 720px; 
+      background: #FFFFFF; 
+      display: flex; flex-direction: column; 
+      padding: 48px;
+      font-family: 'Noto Sans JP', sans-serif;
+      color: #0B192C;
+    }
+    h2 { font-size: 32px; font-weight: 700; margin-bottom: 40px; border-left: 8px solid #0B192C; padding-left: 16px; }
+    .split { display: flex; gap: 40px; flex: 1; }
+    .column { flex: 1; }
+    h3 { font-size: 24px; font-weight: 700; margin-bottom: 24px; color: #0D9488; }
+    .list-item { 
+      padding: 16px; 
+      border: 1px solid #E2E8F0; 
+      border-radius: 6px; 
+      margin-bottom: 12px; 
+      font-size: 18px; 
+      display: flex; 
+      align-items: center;
+      gap: 12px;
+    }
+    .warning { border-left: 6px solid #D97706; background: #FFFBEB; }
+    .check { color: #0D9488; font-weight: 700; }
+    .footer-motif { position: absolute; bottom: 24px; left: 48px; right: 48px; border-top: 2px solid #0D9488; padding-top: 12px; display: flex; justify-content: space-between; font-size: 14px; color: #475569; }
+  </style>
+</head>
+<body>
+  <div class="slide-container">
+    <h2>電力小売り固有の検証</h2>
+    <div class="split">
+      <div class="column">
+        <h3>セキュリティ検証</h3>
+        <div class="list-item"><span class="check">✔</span> PII / 供給地点特定番号の分離</div>
+        <div class="list-item"><span class="check">✔</span> エリア・BG単位の行アクセス制御</div>
+        <div class="list-item warning">⚠ 契約単価・粗利の列レベル保護</div>
+        <div class="list-item"> <span class="check">✔</span> 制度マスタ変更の二者承認証跡</div>
+      </div>
+      <div class="column">
+        <h3>コスト・品質検証</h3>
+        <div class="list-item"><span class="check">✔</span> 48コマ欠落・単価未解決の検知</div>
+        <div class="list-item warning">⚠ 月次精算・バックフィルの費用上限</div>
+        <div class="list-item"><span class="check">✔</span> 速報ストリームのTTL設定</div>
+        <div class="list-item"><span class="check">✔</span> kW / kWh 単位変換の明示</div>
+      </div>
+    </div>
+    <div class="footer-motif">
+      <span>Electricity Domain Specific Controls</span>
+      <span>6</span>
+    </div>
+  </div>
+</body>
+</html>

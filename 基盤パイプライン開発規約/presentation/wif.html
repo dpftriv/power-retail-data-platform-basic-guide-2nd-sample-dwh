@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    .slide-container { 
+      width: 1280px; min-height: 720px; 
+      background: #FFFFFF; 
+      display: flex; flex-direction: column; 
+      padding: 48px;
+      font-family: 'Noto Sans JP', sans-serif;
+      color: #0B192C;
+    }
+    h2 { font-size: 32px; font-weight: 700; margin-bottom: 40px; border-left: 8px solid #0B192C; padding-left: 16px; }
+    .sequence { display: flex; flex-direction: column; gap: 16px; flex: 1; justify-content: center; }
+    .step { display: flex; align-items: center; gap: 24px; }
+    .actor { width: 200px; padding: 16px; border: 1px solid #0B192C; border-radius: 6px; text-align: center; font-weight: 700; background: #F8F9FA; }
+    .action { flex: 1; padding: 12px; border-bottom: 2px dashed #0D9488; font-size: 16px; color: #475569; position: relative; }
+    .action::after { content: '➔'; position: absolute; right: 0; bottom: -10px; color: #0D9488; font-size: 20px; }
+    .footer-motif { position: absolute; bottom: 24px; left: 48px; right: 48px; border-top: 2px solid #0D9488; padding-top: 12px; display: flex; justify-content: space-between; font-size: 14px; color: #475569; }
+  </style>
+</head>
+<body>
+  <div class="slide-container">
+    <h2>Workload Identity Federation</h2>
+    <div class="sequence">
+      <div class="step">
+        <div class="actor">GitHub Actions</div>
+        <div class="action">OIDC Token (JWT) を発行</div>
+        <div class="actor">Google Cloud</div>
+      </div>
+      <div class="step">
+        <div class="actor">WIF Pool</div>
+        <div class="action">Attribute Mapping / Condition で検証</div>
+        <div class="actor">WIF Provider</div>
+      </div>
+      <div class="step">
+        <div class="actor">STS</div>
+        <div class="action">短期の Federated Token へ交換</div>
+        <div class="actor">IAM</div>
+      </div>
+      <div class="step">
+        <div class="actor">CI Service Account</div>
+        <div class="action">サービスアカウントを偽装 (Impersonation)</div>
+        <div class="actor">Target Resources</div>
+      </div>
+    </div>
+    <p style="margin-top: 40px; font-size: 18px; color: #D97706; font-weight: 700; text-align: center;">
+      長期有効なサービスアカウントキーを GitHub Secrets へ保存しない「キーレス認証」
+    </p>
+    <div class="footer-motif">
+      <span>Keyless Authentication with WIF</span>
+      <span>5</span>
+    </div>
+  </div>
+</body>
+</html>

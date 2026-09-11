@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    .slide-container { 
+      width: 1280px; min-height: 720px; 
+      background: #FFFFFF; 
+      display: flex; flex-direction: column; 
+      padding: 48px;
+      font-family: 'Noto Sans JP', sans-serif;
+      color: #0B192C;
+    }
+    h2 { font-size: 32px; font-weight: 700; margin-bottom: 40px; border-left: 8px solid #0B192C; padding-left: 16px; }
+    .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; flex: 1; }
+    .card { 
+      border: 1px solid #E2E8F0; 
+      border-radius: 6px; 
+      padding: 24px; 
+      display: flex; flex-direction: column;
+      background: #F8F9FA;
+    }
+    .card-header { font-size: 20px; font-weight: 700; margin-bottom: 16px; color: #0D9488; height: 60px; }
+    .card-body { font-size: 16px; line-height: 1.6; color: #475569; }
+    .card-footer { margin-top: auto; font-size: 14px; font-weight: 700; color: #0B192C; padding-top: 16px; border-top: 1px solid #E2E8F0; }
+    .footer-motif { position: absolute; bottom: 24px; left: 48px; right: 48px; border-top: 2px solid #0D9488; padding-top: 12px; display: flex; justify-content: space-between; font-size: 14px; color: #475569; }
+  </style>
+</head>
+<body>
+  <div class="slide-container">
+    <h2>統制を4つの検証層へ分解</h2>
+    <div class="grid">
+      <div class="card">
+        <div class="card-header">Terraform 静体検査</div>
+        <div class="card-body">GCPリソース、IAM、境界、暗号、保持設定の誤りを拒否。</div>
+        <div class="card-footer">Conftest / Checkov</div>
+      </div>
+      <div class="card">
+        <div class="card-header">SQL / Dataform 検査</div>
+        <div class="card-body">スキーマ、Policy Tag、PII参照、パーティション、品質を検査。</div>
+        <div class="card-footer">SQL Lint / Dry Run</div>
+      </div>
+      <div class="card">
+        <div class="card-header">結合・受入テスト</div>
+        <div class="card-body">実際の権限、行制御、公開ゲート、再実行、コストを検証。</div>
+        <div class="card-footer">Staging Project</div>
+      </div>
+      <div class="card">
+        <div class="card-header">継続監視</div>
+        <div class="card-body">デプロイ後の権限逸脱、費用急増、ログ欠損、TTL逸脱を検知。</div>
+        <div class="card-footer">Audit Logs / Billing</div>
+      </div>
+    </div>
+    <div class="footer-motif">
+      <span>Data Platform Governance Architecture</span>
+      <span>2</span>
+    </div>
+  </div>
+</body>
+</html>

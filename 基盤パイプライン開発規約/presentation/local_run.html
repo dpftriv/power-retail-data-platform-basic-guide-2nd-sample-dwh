@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    .slide-container { 
+      width: 1280px; min-height: 720px; 
+      background: #FFFFFF; 
+      display: flex; flex-direction: column; 
+      padding: 48px;
+      font-family: 'Noto Sans JP', sans-serif;
+      color: #0B192C;
+    }
+    h2 { font-size: 32px; font-weight: 700; margin-bottom: 40px; border-left: 8px solid #0B192C; padding-left: 16px; }
+    .split { display: flex; gap: 40px; flex: 1; }
+    .column { flex: 1; }
+    h3 { font-size: 24px; font-weight: 700; margin-bottom: 24px; color: #0D9488; text-align: center; }
+    .box { 
+      border: 1px solid #E2E8F0; 
+      border-radius: 6px; 
+      padding: 24px; 
+      background: #F8F9FA;
+      height: 380px;
+    }
+    .code { font-family: 'Roboto Mono', monospace; font-size: 14px; color: #0B192C; line-height: 1.6; }
+    .footer-motif { position: absolute; bottom: 24px; left: 48px; right: 48px; border-top: 2px solid #0D9488; padding-top: 12px; display: flex; justify-content: space-between; font-size: 14px; color: #475569; }
+  </style>
+</head>
+<body>
+  <div class="slide-container">
+    <h2>ローカル検証から CI へ</h2>
+    <div class="split">
+      <div class="column">
+        <h3>Local CLI</h3>
+        <div class="box">
+          <div class="code">
+            $ terraform plan -out=tfplan<br>
+            $ terraform show -json tfplan > plan.json<br><br>
+            $ conftest test --policy policies plan.json<br>
+            $ checkov -d terraform --check CKV_GCP_...<br><br>
+            $ bash scripts/bq-dry-run.sh query.sql
+          </div>
+          <p style="margin-top: 20px; font-size: 16px; color: #475569;">
+            ・PR作成前の早期フィードバック<br>
+            ・開発者の手元で統制を自己完結
+          </p>
+        </div>
+      </div>
+      <div class="column">
+        <h3>CI Pipeline (GitHub Actions)</h3>
+        <div class="box">
+          <div class="code">
+            jobs:<br>
+            &nbsp;&nbsp;terraform-static:<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;steps:<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- uses: conftest-action<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- uses: checkov-action<br><br>
+            &nbsp;&nbsp;sql-and-cost:<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;steps:<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- run: bq-dry-run.sh
+          </div>
+          <p style="margin-top: 20px; font-size: 16px; color: #475569;">
+            ・マージ前の最終強制ゲート<br>
+            ・WIF によるセキュアな認証
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="footer-motif">
+      <span>Local-to-CI Consistency</span>
+      <span>7</span>
+    </div>
+  </div>
+</body>
+</html>
